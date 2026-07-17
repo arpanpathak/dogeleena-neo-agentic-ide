@@ -81,13 +81,14 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Tokyonight Storm** 🌙 — a deep dark blue theme for low eye strain. Easy to swap:
+Dogeleena ships with **Tokyonight Storm** 🌙 — a deep dark blue theme, similar to Night Owl. Low contrast, low eye strain.
 
-| Theme | Vibe | Plugin Name |
+If you want to try others, swap the plugin in `colorscheme.lua`:
+
+| Theme | Mood | Plugin Name |
 |-------|------|-------------|
-| **Tokyonight Storm** 🌙 | Deep dark blue, calm | `folke/tokyonight.nvim` (default) |
+| **Tokyonight Storm** 🌙 | Deep dark blue, calm | `folke/tokyonight.nvim` **(default, included)** |
 | **Catppuccin Mocha** 🧋 | Warm dark, cozy | `catppuccin/nvim` |
-| **Rose Pine Moon** 🌹 | Soft rose/pine, elegant | `rose-pine/neovim` |
 | **Nord** ❄️ | Arctic blue, frosty | `shaunsingh/nord.nvim` |
 | **Oceanic Next** 🌊 | Deep ocean blue | `mhartington/oceanic-next` |
 
