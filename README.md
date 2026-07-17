@@ -81,36 +81,26 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Night Owl** 🦉 — a dark theme optimized for long coding sessions. Low contrast, low eye strain.
+Dogeleena ships with **Night Owl** 🦉 (default) and pre-installs **Oceanic Next** 🌊 for easy switching. Both are dark, eye-soothing themes.
 
-If you want to try others, swap the plugin in `colorscheme.lua`:
+| Theme | Mood | How to activate |
+|-------|------|----------------|
+| **Night Owl** 🦉 | Dark, low contrast, long sessions | Default |
+| **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | Change colorscheme to `oceanic-next` |
+| **Nord** ❄️ | Arctic blue, frosty | Uncomment in `themes.lua` + change colorscheme |
+| **Catppuccin Mocha** 🧋 | Warm dark, cozy | Uncomment in `themes.lua` + change colorscheme |
 
-| Theme | Mood | Plugin Name |
-|-------|------|-------------|
-| **Night Owl** 🦉 | Dark, low contrast | `oxfist/night-owl.nvim` **(default, included)** |
-| **Catppuccin Mocha** 🧋 | Warm dark, cozy | `catppuccin/nvim` |
-| **Nord** ❄️ | Arctic blue, frosty | `shaunsingh/nord.nvim` |
-| **Oceanic Next** 🌊 | Deep ocean blue | `mhartington/oceanic-next` |
-
-To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`. Example for Catppuccin:
+To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`:
 
 ```lua
-return {
-  "catppuccin/nvim",
-  lazy = false,
-  priority = 1000,
-  opts = {
-    flavour = "mocha",  -- mocha | macchiato | frappe | latte
-    transparent_background = false,
-  },
-  config = function(_, opts)
-    require("catppuccin").setup(opts)
-    vim.cmd.colorscheme("catppuccin")
-  end,
-}
+-- Change this line:
+vim.cmd.colorscheme("night-owl")
+
+-- To Oceanic Next:
+vim.cmd.colorscheme("OceanicNext")
 ```
 
-Restart dogeleena. Lazy.nvim auto-downloads the new theme.
+Then restart. No download needed — already installed.
 
 ## Keybinds
 
