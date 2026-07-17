@@ -5,6 +5,12 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
+  -- Lazy-load on these keybinds so the plugin is ready before the command runs
+  keys = {
+    { "<leader>ac", ":CodeCompanionChat<CR>", desc = "AI Chat", mode = "n" },
+    { "<leader>aa", ":CodeCompanionChat<CR>", desc = "AI Chat", mode = "n" },
+    { "<leader>ae", ":CodeCompanionActions<CR>", desc = "AI Actions", mode = "v" },
+  },
   config = function()
     require("codecompanion").setup({
       display = {
@@ -32,9 +38,5 @@ return {
         agent = { adapter = "deepseek" },
       },
     })
-
-    vim.keymap.set("n", "<leader>ac", ":CodeCompanionChat<CR>", {})
-    vim.keymap.set("v", "<leader>ae", ":CodeCompanionActions<CR>", {})
-    vim.keymap.set("n", "<leader>aa", ":CodeCompanionChat<CR>", {})
   end,
 }
