@@ -29,6 +29,8 @@ _.._ :`4MM$!YYYYYYYYYii,.__.diii$$YYYYYYYYYYY
 
 One-command install. Zero config. Zero interference with existing Neovim.
 
+---
+
 ## Install
 
 ```bash
@@ -54,12 +56,28 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 - File explorer, buffer tabs, markdown preview
 - 100% isolated from your ~/.config/nvim
 
-## Docs
+## Leader Key
 
-- [Keybindings](doc/KEYBINDINGS.md)
-- [Vim Motions](doc/VIM-MOTIONS.md)
-- [AI Setup](doc/AI.md)
-- [Fonts](fonts/README.md)
+All custom shortcuts use a **leader key** — a prefix key you press before the shortcut.
+
+**Default:** `<space>` (spacebar). So `<leader>e` means press space then e.
+
+**To change it**, edit `~/.config/dogeleena/init.lua` and find:
+
+```lua
+vim.g.mapleader = " "
+```
+
+Replace `" "` with your preferred key. Common choices:
+
+| Key | Setting | Notes |
+|-----|---------|-------|
+| Space | `vim.g.mapleader = " "` | Default. Ergonomic, easy to reach |
+| Comma | `vim.g.mapleader = ","` | Popular with vim veterans |
+| Semicolon | `vim.g.mapleader = ";"` | Good if you rarely use `;` |
+| Tab | `vim.g.mapleader = "\\t"` | Unused by default in normal mode |
+
+After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Keybinds
 
@@ -83,6 +101,13 @@ export OPENAI_API_KEY="sk-..."         # GPT-4o
 export DEEPSEEK_API_KEY="sk-..."       # DeepSeek
 export GEMINI_API_KEY="..."            # Gemini
 ```
+
+## Docs
+
+- [Keybindings](doc/KEYBINDINGS.md)
+- [Vim Motions](doc/VIM-MOTIONS.md)
+- [AI Setup](doc/AI.md)
+- [Fonts](fonts/README.md)
 
 ## License
 
