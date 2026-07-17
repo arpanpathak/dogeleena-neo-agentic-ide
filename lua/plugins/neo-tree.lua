@@ -24,6 +24,10 @@ return {
       window = {
         position = "left",
         width = 30,
+        mappings = {
+          ["<leader>ac"] = "CodeCompanionChat",
+          ["<leader>aa"] = "CodeCompanionChat",
+        },
       },
     })
 
