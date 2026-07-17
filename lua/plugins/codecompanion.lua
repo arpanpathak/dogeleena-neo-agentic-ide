@@ -41,7 +41,7 @@ return {
         chat = {
           tools = {
             opts = {
-              default_tools = { "agent" },
+              default_tools = { "files" },
             },
           },
         },
