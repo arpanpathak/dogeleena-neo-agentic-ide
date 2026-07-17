@@ -40,8 +40,16 @@ return {
       interactions = {
         chat = {
           tools = {
+            groups = {
+              ["agent"] = {
+                opts = {
+                  ignore_system_prompt = false,
+                  ignore_tool_system_prompt = false,
+                },
+              },
+            },
             opts = {
-              default_tools = { "files" },
+              default_tools = { "agent" },
             },
           },
         },
