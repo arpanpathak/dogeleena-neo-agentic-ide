@@ -63,16 +63,16 @@ return {
 
       alpha.setup(dashboard.opts)
 
-      -- Alpha sets modifiable=false after setup. We need to override it
-      -- after the fact so leader key (Space) works on the dashboard.
-      -- FileType fires too early (alpha overrides it before setup finishes).
-      vim.api.nvim_create_autocmd("BufEnter", {
-        pattern = "alpha",
-        once = true,
-        callback = function(args)
-          vim.bo[args.buf].modifiable = true
-        end,
-      })
+      -- Alpha sets modifiable=false and keeps it false. We need it true so
+      -- leader keys (Space) work. FileType fires before alpha finishes
+      -- its setup; BufEnter matches buf name, not filetype. Use schedule
+      -- to set it after alpha's setup is fully done.
+      vim.schedule(function()
+        local bufnr = vim.fn.bufnr("")
+        if vim.bo[bufnr].filetype == "alpha" then
+          vim.bo[bufnr].modifiable = true
+        end
+      end)
     end,
   },
 
