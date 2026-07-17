@@ -118,9 +118,29 @@ return {
       },
 
       -- ── Interaction Strategies ──────────────────────────────────────────────
+      -- NOTE: Do NOT use `strategies` key — in setup() it gets merged into
+      -- `interactions` via tbl_deep_extend which WIPES existing `chat.tools`.
+      -- Use `interactions` directly instead.
       interactions = {
-        chat = { adapter = ai_adapter },    -- Chat panel uses detected adapter
+        chat = {
+          adapter = ai_adapter,    -- Chat panel uses detected adapter
+          -- Agent tool group: type @{agent} to activate file/tool access
+          tools = {
+            groups = {
+              ["agent"] = {
+                opts = {
+                  ignore_system_prompt = false,
+                  ignore_tool_system_prompt = false,
+                },
+              },
+            },
+            opts = {
+              default_tools = { "agent" },
+            },
+          },
+        },
         inline = { adapter = ai_adapter },  -- Inline editing uses same adapter
+        agent = { adapter = ai_adapter },    -- Agent strategy uses same adapter
       },
     })
 
