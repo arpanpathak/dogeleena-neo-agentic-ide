@@ -40,7 +40,15 @@ return {
         inline = { adapter = "deepseek" },
         agent = { adapter = "deepseek" },
       },
-      -- Use default tool approvals (show accept/reject UI for file create/edit/delete/run)
+      interactions = {
+        chat = {
+          tools = {
+            opts = {
+              default_tools = { "agent" },
+            },
+          },
+        },
+      },
     })
   end,
 }
