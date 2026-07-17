@@ -15,9 +15,6 @@ return {
     require("codecompanion").setup({
       display = {
         chat = {
-          output = {
-            filetype = "markdown",
-          },
           window = {
             layout = "vertical",
             position = "right",

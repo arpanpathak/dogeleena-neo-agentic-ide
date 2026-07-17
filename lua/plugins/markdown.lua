@@ -1,7 +1,7 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   opts = {
-    on = { "markdown", "codecompanion" },
+    file_types = { "markdown", "codecompanion" },
   },
   dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
