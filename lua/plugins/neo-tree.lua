@@ -6,6 +6,9 @@ return {
     "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
   },
+  keys = {
+    { "<leader>e", ":Neotree filesystem reveal left<CR>", desc = "File Explorer", mode = "n" },
+  },
   config = function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
@@ -26,7 +29,5 @@ return {
         width = 30,
       },
     })
-
-    vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal left<CR>", {})
   end,
 }
