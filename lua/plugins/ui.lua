@@ -61,16 +61,18 @@ return {
       end
       dashboard.section.footer.val = footer()
 
-      -- Allow leader key (Space) to work on the dashboard
-      -- MUST be before alpha.setup() — the FileType event fires during setup()
-      vim.api.nvim_create_autocmd("FileType", {
+      alpha.setup(dashboard.opts)
+
+      -- Alpha sets modifiable=false after setup. We need to override it
+      -- after the fact so leader key (Space) works on the dashboard.
+      -- FileType fires too early (alpha overrides it before setup finishes).
+      vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "alpha",
+        once = true,
         callback = function(args)
           vim.bo[args.buf].modifiable = true
         end,
       })
-
-      alpha.setup(dashboard.opts)
     end,
   },
 
