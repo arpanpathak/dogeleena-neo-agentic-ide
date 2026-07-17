@@ -54,6 +54,12 @@ return {
     "nvim-lua/plenary.nvim",          -- Utility functions
     "nvim-treesitter/nvim-treesitter", -- Syntax parsing for AI diffs
   },
+  -- Lazy-load keymaps — registered BEFORE config runs so Space+ac works everywhere
+  keys = {
+    { "<leader>ac", ":CodeCompanionChat<CR>", desc = "AI Chat", mode = "n" },
+    { "<leader>aa", ":CodeCompanionChat<CR>", desc = "AI Chat", mode = "n" },
+    { "<leader>ae", ":CodeCompanionActions<CR>", desc = "AI Actions", mode = "v" },
+  },
   config = function()
     require("codecompanion").setup({
       -- ── Chat Window Layout ─────────────────────────────────────────────────
