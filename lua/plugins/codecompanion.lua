@@ -40,39 +40,7 @@ return {
         inline = { adapter = "deepseek" },
         agent = { adapter = "deepseek" },
       },
-      interactions = {
-        chat = {
-          tools = {
-            ["create_file"] = {
-              opts = {
-                require_approval_before = false,
-              },
-            },
-            ["insert_edit_into_file"] = {
-              opts = {
-                require_approval_before = { buffer = false, file = false },
-                require_confirmation_after = false,
-              },
-            },
-            ["run_command"] = {
-              opts = {
-                require_approval_before = false,
-                require_cmd_approval = false,
-              },
-            },
-            ["read_file"] = {
-              opts = {
-                require_approval_before = false,
-              },
-            },
-            ["delete_file"] = {
-              opts = {
-                require_approval_before = false,
-              },
-            },
-          },
-        },
-      },
+      -- Use default tool approvals (show accept/reject UI for file create/edit/delete/run)
     })
   end,
 }
