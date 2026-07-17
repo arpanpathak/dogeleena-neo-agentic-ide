@@ -25,8 +25,12 @@ return {
         position = "left",
         width = 30,
         mappings = {
-          ["<leader>ac"] = "CodeCompanionChat",
-          ["<leader>aa"] = "CodeCompanionChat",
+          ["<leader>ac"] = function()
+            vim.cmd("CodeCompanionChat")
+          end,
+          ["<leader>aa"] = function()
+            vim.cmd("CodeCompanionChat")
+          end,
         },
       },
     })
