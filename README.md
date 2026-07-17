@@ -43,6 +43,46 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 dogeleena
 ```
 
+## Updating
+
+After a new release, sync the latest config to your local install:
+
+```bash
+# Re-run the install script (pulls latest from GitHub)
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/main/install.sh | bash
+```
+
+> ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
+> Backup first: `cp -r ~/.config/dogeleena ~/.config/dogeleena.bak`
+
+**If you prefer a surgical update** (e.g., only new themes/plugins changed), copy individual files from the repo instead:
+
+```bash
+# Example: update only themes
+curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/main/lua/plugins/themes.lua
+```
+
+### Clear plugin cache
+
+When new plugins are added (like new themes), Lazy.nvim may not detect them until the cache is cleared. After updating config files, run inside Dogeleena:
+
+```vim
+" Restart and force Lazy to re-index all plugins
+:Lazy! sync
+```
+
+Or from the terminal:
+
+```bash
+# Nuke the Lazy state/cache so plugins re-install on next launch
+rm -rf ~/.local/state/dogeleena/lazy
+rm -rf ~/.cache/dogeleena/lazy
+
+# Then launch Dogeleena — Lazy will re-download all plugins fresh
+dogeleena
+```
+
 ## Uninstall
 
 ```bash
@@ -81,14 +121,16 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Night Owl** 🦉 (default) and pre-installs **Oceanic Next** 🌊 for easy switching. Both are dark, eye-soothing themes.
+Dogeleena ships with **Night Owl** 🦉 (default) and **5 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes.
 
 | Theme | Mood | How to activate |
 |-------|------|----------------|
 | **Night Owl** 🦉 | Dark, low contrast, long sessions | Default |
-| **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | Change colorscheme to `oceanic-next` |
-| **Nord** ❄️ | Arctic blue, frosty | Uncomment in `themes.lua` + change colorscheme |
-| **Catppuccin Mocha** 🧋 | Warm dark, cozy | Uncomment in `themes.lua` + change colorscheme |
+| **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | `vim.cmd.colorscheme("OceanicNext")` |
+| **Nord** ❄️ | Arctic blue, frosty, clean | `vim.cmd.colorscheme("nord")` |
+| **Catppuccin Mocha** 🧋 | Warm dark, cozy, popular | `vim.cmd.colorscheme("catppuccin-mocha")` |
+| **Tokyo Night** 🌃 | Deep blue/purple night sky, vibrant | `vim.cmd.colorscheme("tokyonight-night")` |
+| **Kanagawa** 🏮 | Dark ocean ink, japanese woodblock art | `vim.cmd.colorscheme("kanagawa")` |
 
 To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`:
 
@@ -96,8 +138,12 @@ To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`:
 -- Change this line:
 vim.cmd.colorscheme("night-owl")
 
--- To Oceanic Next:
-vim.cmd.colorscheme("OceanicNext")
+-- To one of the pre-installed themes:
+vim.cmd.colorscheme("OceanicNext")     -- 🌊 Deep ocean blue
+-- vim.cmd.colorscheme("nord")            -- ❄️ Arctic blue
+-- vim.cmd.colorscheme("catppuccin-mocha") -- 🧋 Warm dark
+-- vim.cmd.colorscheme("tokyonight-night") -- 🌃 Night sky
+-- vim.cmd.colorscheme("kanagawa")         -- 🏮 Japanese ink
 ```
 
 Then restart. No download needed — already installed.
