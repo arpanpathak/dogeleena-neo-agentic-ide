@@ -94,15 +94,9 @@ return {
           end,
 
           -- DeepSeek (V4, R1, etc.)
-          -- NOTE: thinking.type must be disabled when using tools. DeepSeek's
-          -- reasoning_content + tool_calls in the same response creates two
-          -- consecutive assistant messages which the API rejects.
           deepseek = function()
             return require("codecompanion.adapters").extend("deepseek", {
               env = { api_key = os.getenv("DEEPSEEK_API_KEY") or "" },
-              schema = {
-                ["thinking.type"] = { default = "disabled" },
-              },
             })
           end,
 
