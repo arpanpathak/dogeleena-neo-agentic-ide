@@ -79,6 +79,38 @@ Replace `" "` with your preferred key. Common choices:
 
 After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
+## Themes
+
+Dogeleena ships with **Tokyonight Storm** 🌙 — a deep dark blue theme for low eye strain. Easy to swap:
+
+| Theme | Vibe | Plugin Name |
+|-------|------|-------------|
+| **Tokyonight Storm** 🌙 | Deep dark blue, calm | `folke/tokyonight.nvim` (default) |
+| **Catppuccin Mocha** 🧋 | Warm dark, cozy | `catppuccin/nvim` |
+| **Rose Pine Moon** 🌹 | Soft rose/pine, elegant | `rose-pine/neovim` |
+| **Nord** ❄️ | Arctic blue, frosty | `shaunsingh/nord.nvim` |
+| **Oceanic Next** 🌊 | Deep ocean blue | `mhartington/oceanic-next` |
+
+To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`. Example for Catppuccin:
+
+```lua
+return {
+  "catppuccin/nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {
+    flavour = "mocha",  -- mocha | macchiato | frappe | latte
+    transparent_background = false,
+  },
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
+    vim.cmd.colorscheme("catppuccin")
+  end,
+}
+```
+
+Restart dogeleena. Lazy.nvim auto-downloads the new theme.
+
 ## Keybinds
 
 | Key | Action |
