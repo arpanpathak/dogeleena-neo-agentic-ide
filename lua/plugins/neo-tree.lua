@@ -26,9 +26,11 @@ return {
         width = 30,
         mappings = {
           ["<leader>ac"] = function()
+            require("lazy").load({ plugins = "codecompanion.nvim" })
             vim.cmd("CodeCompanionChat")
           end,
           ["<leader>aa"] = function()
+            require("lazy").load({ plugins = "codecompanion.nvim" })
             vim.cmd("CodeCompanionChat")
           end,
         },
