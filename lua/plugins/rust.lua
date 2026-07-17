@@ -15,7 +15,7 @@ return {
           vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
           vim.keymap.set('n', '<leader>ca', vim.cmd.RustLsp('codeAction'), opts)
           vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
+          vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
         end,
       },
     }
