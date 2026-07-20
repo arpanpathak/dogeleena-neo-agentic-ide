@@ -14,9 +14,26 @@ return {
   "mrcjkb/rustaceanvim",
   version = "^9",  -- Use v9.x (stable)
   lazy = false,    -- Load at startup
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp", -- Completion capabilities for nvim-cmp
+  },
   config = function()
     vim.g.rustaceanvim = {
       server = {
+        -- Wire completion capabilities so nvim-cmp gets suggestions from rust-analyzer
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = {
+          ["rust-analyzer"] = {
+            inlayHints = {
+              -- Disable visibility inlay hints ("pub") that show as white text
+              visibility = { enable = false },
+              -- Keep type hints but they'll be styled via LspInlayHint below
+              typeHints = { enable = true },
+              -- Disable closing brace hints (noisy)
+              closingBraceHints = { enable = false },
+            },
+          },
+        },
         on_attach = function(client, bufnr)
           local opts = { silent = true, buffer = bufnr }
 
@@ -47,6 +64,14 @@ return {
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           -- Show diagnostic details in a floating window
           vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
+
+          -- ═════════════════════════════════════════════════════════════════
+          -- STYLE: LspInlayHint — make inlay hints subtle & readable
+          -- ═════════════════════════════════════════════════════════════════
+          vim.api.nvim_set_hl(0, "LspInlayHint", {
+            fg = "#5a5e6b",  -- subtle grey (works with both night-owl & tokyonight)
+            italic = true,
+          })
         end,
       },
     }
