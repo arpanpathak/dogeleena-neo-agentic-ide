@@ -21,6 +21,18 @@ BIN_DIR="${HOME}/.local/bin"
 echo ""
 echo "  🎀  Installing Dogeleena..."
 
+# aarch64 / ARM64 (e.g. Jetson, Raspberry Pi) needs build tools to compile
+# Treesitter parsers and some language servers.
+ARCH="$(uname -m)"
+if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+  echo "  🐾  ARM64/aarch64 detected — checking build tools..."
+  if ! command -v git >/dev/null 2>&1 || ! command -v gcc >/dev/null 2>&1 || ! command -v make >/dev/null 2>&1; then
+    echo "  ⚠️  Missing build tools. Installing build-essential and git (sudo required)..."
+    sudo apt update
+    sudo apt install -y build-essential git
+  fi
+fi
+
 # Check nvim
 command -v nvim >/dev/null 2>&1 || { echo "  ❌  Neovim not found"; exit 1; }
 

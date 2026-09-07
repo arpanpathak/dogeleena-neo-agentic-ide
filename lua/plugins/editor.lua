@@ -95,25 +95,21 @@ return {
 
   -- ── Treesitter: Syntax Highlighting ─────────────────────────────────────────
   -- Provides rich syntax highlighting, code folding, and incremental selection.
+  -- Pinned to v0.9.x because newer main requires the tree-sitter-cli binary;
+  -- the v0.9.x line builds parsers with the system C compiler (build-essential).
   -- Auto-installs parsers for detected filetypes.
   {
     "nvim-treesitter/nvim-treesitter",
+    tag = "v0.9.3",
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.config").setup({})
-
-      -- Enable treesitter-based features via Neovim built-in API
-      vim.treesitter.highlighter.new = vim.treesitter.highlighter.new
-
-      -- Request autocommand to install parsers on file open
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "*",
-        callback = function(args)
-          pcall(function()
-            require("nvim-treesitter.install").ensure(args.match)
-          end)
-        end,
+      require("nvim-treesitter.configs").setup({
+        -- Markdown parsers are required by render-markdown.nvim.
+        ensure_installed = { "markdown", "markdown_inline" },
+        sync_install = true,
+        auto_install = true,
+        highlight = { enable = true },
       })
     end,
   },

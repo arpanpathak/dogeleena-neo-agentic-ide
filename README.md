@@ -43,6 +43,13 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 dogeleena
 ```
 
+> **aarch64 / ARM64 (Jetson, Raspberry Pi, etc.)** — make sure you have the
+> build essentials installed first. They are needed to compile Treesitter
+> parsers and some language servers:
+> ```bash
+> sudo apt update && sudo apt install build-essential git
+> ```
+
 ## Updating
 
 After a new release, sync the latest config to your local install:

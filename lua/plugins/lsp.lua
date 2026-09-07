@@ -37,15 +37,24 @@ return {
     -- No npm/pip/cargo -g needed — Mason handles it all.
     require("mason").setup()
 
+    -- Mason's clangd package does not support aarch64/ARM64. On those systems
+    -- we keep the clangd server config below and use the distro's clangd.
+    local is_arm64 = vim.loop.os_uname().machine == "aarch64"
+      or vim.loop.os_uname().machine == "arm64"
+
     -- Auto-install these servers when they're needed (lazy install on demand)
+    local ensure_installed = {
+      "ts_ls",                   -- TypeScript / JavaScript
+      "pyright",                 -- Python (Microsoft)
+      "kotlin_language_server",  -- Kotlin
+      "jdtls",                   -- Java (Eclipse JDT)
+    }
+    if not is_arm64 then
+      table.insert(ensure_installed, "clangd") -- C / C++ (LLVM)
+    end
+
     require("mason-lspconfig").setup({
-      ensure_installed = {
-        "ts_ls",                   -- TypeScript / JavaScript
-        "pyright",                 -- Python (Microsoft)
-        "clangd",                  -- C / C++ (LLVM)
-        "kotlin_language_server",  -- Kotlin
-        "jdtls",                   -- Java (Eclipse JDT)
-      },
+      ensure_installed = ensure_installed,
       automatic_installation = true, -- Install missing servers automatically
     })
 
