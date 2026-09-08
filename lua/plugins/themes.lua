@@ -41,9 +41,20 @@ return {
   },
 
   -- 🌃 Tokyo Night — deep blue/purple night sky, vibrant
-  --    installed via ui.lua for <leader>th toggle
   --    switch: vim.cmd.colorscheme("tokyonight-night")
   --    variants: tokyonight-night, tokyonight-storm, tokyonight-day
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = {
+      style = "night",        -- "night" | "storm" | "day"
+      transparent = false,
+      styles = {
+        comments = { italic = true },
+        keywords = { bold = true },
+      },
+    },
+  },
 
   -- 🏮 Kanagawa — dark ocean ink, inspired by japanese woodblock art
   --    switch: vim.cmd.colorscheme("kanagawa")
