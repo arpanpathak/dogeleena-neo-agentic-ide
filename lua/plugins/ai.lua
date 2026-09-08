@@ -50,6 +50,7 @@ end
 
 return {
   "olimorris/codecompanion.nvim",
+  tag = "v19.23.0", -- stable release; avoid nightly/main churn
   dependencies = {
     "nvim-lua/plenary.nvim",          -- Utility functions
     "nvim-treesitter/nvim-treesitter", -- Syntax parsing for AI diffs
