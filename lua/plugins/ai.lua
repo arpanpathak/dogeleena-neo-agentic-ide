@@ -12,7 +12,7 @@
 --   export ANTHROPIC_API_KEY="sk-ant-..." # Anthropic Claude
 --   export DEEPSEEK_API_KEY="sk-..."      # DeepSeek
 --   export GEMINI_API_KEY="..."           # Google Gemini
---   export OLLAMA_HOST="localhost:11434"  # Local Ollama
+--   export OLLAMA_HOST="http://localhost:11434"  # Local Ollama
 --   export OPENROUTER_API_KEY="sk-or-..." # OpenRouter (any model)
 --
 -- DEFAULT ADAPTER: The first available API key found determines the adapter.
@@ -115,9 +115,10 @@ return {
           end,
 
           -- Ollama (local, free, private)
+          -- OLLAMA_HOST must include the scheme, e.g. http://localhost:11434
           ollama = function()
             return require("codecompanion.adapters").extend("ollama", {
-              env = { host = os.getenv("OLLAMA_HOST") or "localhost:11434" },
+              env = { url = os.getenv("OLLAMA_HOST") or "http://localhost:11434" },
             })
           end,
         },

@@ -11,6 +11,32 @@ Set one environment variable before launching Dogeleena.
 | OpenRouter | `OPENROUTER_API_KEY` | Any model |
 | Ollama | `OLLAMA_HOST` | Local (free) |
 
+## Local Ollama
+
+Yes, Dogeleena works with a local Ollama server. If no cloud API key is set,
+Dogeleena automatically uses Ollama.
+
+```bash
+# Make sure Ollama is running locally
+ollama serve
+
+# Point Dogeleena at it (default is http://localhost:11434)
+export OLLAMA_HOST="http://localhost:11434"
+dogeleena
+```
+
+To select a model:
+
+1. Open AI chat with `<leader>ac`.
+2. Press `ga` (change adapter).
+3. Pick **Ollama** if it isn't already selected.
+4. Pick the model you want — Dogeleena lists models pulled into your local Ollama server.
+
+> If you don't see a model picker, check that Ollama is running and has models:
+> ```bash
+> ollama list
+> ```
+
 ## Agent Mode
 
 In AI chat (`<leader>ac`), type `@{agent}` to give AI file/tool access.

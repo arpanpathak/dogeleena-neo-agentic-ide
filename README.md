@@ -188,7 +188,11 @@ export ANTHROPIC_API_KEY="sk-ant-..."  # Claude
 export OPENAI_API_KEY="sk-..."         # GPT-4o
 export DEEPSEEK_API_KEY="sk-..."       # DeepSeek
 export GEMINI_API_KEY="..."            # Gemini
+export OPENROUTER_API_KEY="sk-or-..."  # OpenRouter (any model)
+export OLLAMA_HOST="http://localhost:11434"  # Local Ollama (no API key needed)
 ```
+
+See [AI Setup](doc/AI.md) for Ollama model selection and agent usage.
 
 ## Docs
 
