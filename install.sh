@@ -14,7 +14,7 @@ fi
 
 # Install
 REPO="arpanpathak/dogeleena-neo-agentic-ide"
-VERSION="v0.1.2"
+VERSION="v0.1.3"
 CONFIG_DIR="${HOME}/.config/dogeleena"
 BIN_DIR="${HOME}/.local/bin"
 
@@ -36,6 +36,19 @@ fi
 # Check nvim
 command -v nvim >/dev/null 2>&1 || { echo "  ❌  Neovim not found"; exit 1; }
 
+# Check tree-sitter CLI (needed by nvim-treesitter main to build parsers).
+export PATH="${HOME}/.local/bin:${PATH}"
+if ! command -v tree-sitter >/dev/null 2>&1; then
+  if command -v cargo >/dev/null 2>&1; then
+    echo "  ⚙️  tree-sitter-cli not found. Installing via cargo (first time takes a few minutes)..."
+    cargo install tree-sitter-cli --version 0.27.0 --root "${HOME}/.local"
+  else
+    echo "  ❌  tree-sitter-cli not found and cargo is not available."
+    echo "     Install Rust/cargo or tree-sitter-cli, then re-run this script."
+    exit 1
+  fi
+fi
+
 # Download
 TMPDIR=$(mktemp -d)
 SRC="${TMPDIR}/dogeleena"
@@ -51,6 +64,7 @@ fi
 # Install config
 mkdir -p "$CONFIG_DIR"/lua/plugins
 cp "$SRC/init.lua" "$CONFIG_DIR/"
+cp "$SRC/lazy-lock.json" "$CONFIG_DIR/lazy-lock.json"
 cp "$SRC"/lua/plugins/*.lua "$CONFIG_DIR/lua/plugins/"
 echo "  ✅  Config installed to $CONFIG_DIR"
 
@@ -68,7 +82,7 @@ echo "  🎀  Dogeleena installed!"
 echo "  Launch: dogeleena"
 echo ""
 echo "  Uninstall: dogeleena-neo-agentic-ide uninstall"
-echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.2/install.sh | bash -s uninstall)"
+echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.3/install.sh | bash -s uninstall)"
 echo ""
 echo "  Set your AI key: export ANTHROPIC_API_KEY=\"sk-ant-...\""
 echo ""
