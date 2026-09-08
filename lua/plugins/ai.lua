@@ -13,10 +13,15 @@
 --   export DEEPSEEK_API_KEY="sk-..."      # DeepSeek
 --   export GEMINI_API_KEY="..."           # Google Gemini
 --   export OLLAMA_HOST="http://localhost:11434"  # Local Ollama
+--   export OLLAMA_MODEL="qwen2.5-coder:7b"      # Optional: force an Ollama model
 --   export OPENROUTER_API_KEY="sk-or-..." # OpenRouter (any model)
 --
 -- DEFAULT ADAPTER: The first available API key found determines the adapter.
 -- Order checked: OpenAI → Anthropic → DeepSeek → Gemini → Ollama (local)
+--
+-- NOTE: @{agent} requires a model with function/tool calling. Dogeleena asks
+-- Ollama which models can use tools and picks one at runtime; set OLLAMA_MODEL
+-- to force a specific model.
 --
 -- USAGE:
 --   <leader>ac  → Open chat (right sidebar)
@@ -46,6 +51,37 @@ elseif os.getenv("OPENROUTER_API_KEY") then
 else
   -- Fall back to local Ollama if available (no API key needed)
   ai_adapter = "ollama"
+end
+
+-- Ollama model helper ---------------------------------------------------------
+-- Don't hardcode model names. Ask the running Ollama server which models it has,
+-- then pick the first one CodeCompanion resolves as tool-capable at runtime.
+-- OLLAMA_MODEL can still force a specific model if the user wants one.
+---@param adapter table
+---@return string|nil
+local function ollama_tool_model(adapter)
+  local explicit = os.getenv("OLLAMA_MODEL")
+  if explicit and explicit ~= "" then
+    return explicit
+  end
+
+  local ok, get_models = pcall(require, "codecompanion.adapters.http.ollama.get_models")
+  if not ok then
+    return nil
+  end
+
+  local choices = get_models.choices(adapter, { async = false })
+  if type(choices) ~= "table" then
+    return nil
+  end
+
+  for name, choice in pairs(choices) do
+    if choice and choice.opts and choice.opts.can_use_tools then
+      return name
+    end
+  end
+
+  return nil
 end
 
 return {
@@ -118,9 +154,19 @@ return {
           -- Ollama (local, free, private)
           -- OLLAMA_HOST must include the scheme, e.g. http://localhost:11434
           ollama = function()
-            return require("codecompanion.adapters").extend("ollama", {
+            local adapter = require("codecompanion.adapters").extend("ollama", {
               env = { url = os.getenv("OLLAMA_HOST") or "http://localhost:11434" },
             })
+
+            -- Default to a tool-calling model so @{agent} actually edits/runs code.
+            local default_model = adapter.schema.model.default
+            adapter.schema.model.default = function(self)
+              return ollama_tool_model(self)
+                or (type(default_model) == "function" and default_model(self))
+                or default_model
+            end
+
+            return adapter
           end,
         },
       },
@@ -132,16 +178,10 @@ return {
       interactions = {
         chat = {
           adapter = ai_adapter,    -- Chat panel uses detected adapter
-          -- Agent tool group: type @{agent} to activate file/tool access
+          -- Agent tool group: type @{agent} to activate file/tool access.
+          -- The built-in agent group already has its own strong agent system
+          -- prompt and tool schemas; don't override it here.
           tools = {
-            groups = {
-              ["agent"] = {
-                opts = {
-                  ignore_system_prompt = false,
-                  ignore_tool_system_prompt = false,
-                },
-              },
-            },
             opts = {
               default_tools = { "agent" },
             },

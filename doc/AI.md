@@ -22,10 +22,32 @@ ollama serve
 
 # Point Dogeleena at it (default is http://localhost:11434)
 export OLLAMA_HOST="http://localhost:11434"
+
+# Optional: force a specific Ollama model
+export OLLAMA_MODEL="qwen2.5-coder:7b"
+
 dogeleena
 ```
 
-To select a model:
+### Use a tool-capable model for @{agent}
+
+`@{agent}` uses CodeCompanion's built-in tools (`read_file`, `create_file`,
+`insert_edit_into_file`, `run_command`, etc.). That only works with models that
+support **function/tool calling**.
+
+Good Ollama choices are Qwen3.5, Qwen3, or Qwen2.5 (plain). Some local
+`qwen2.5-coder` builds on Ollama print JSON/code blocks instead of making real
+tool calls, so they do **not** work with `@{agent}`.
+
+Dogeleena tries to pick a tool-capable Ollama model automatically. To force a
+specific one, set `OLLAMA_MODEL` before launching:
+
+```bash
+export OLLAMA_MODEL="qwen3.5:latest"
+dogeleena
+```
+
+To select a different model in-session:
 
 1. Open AI chat with `<leader>ac`.
 2. Press `ga` (change adapter).

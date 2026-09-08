@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.4/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -60,7 +60,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.4/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.4/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -97,7 +97,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.4/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash -s uninstall
 ```
 
 ## Features
@@ -194,6 +194,7 @@ export DEEPSEEK_API_KEY="sk-..."       # DeepSeek
 export GEMINI_API_KEY="..."            # Gemini
 export OPENROUTER_API_KEY="sk-or-..."  # OpenRouter (any model)
 export OLLAMA_HOST="http://localhost:11434"  # Local Ollama (no API key needed)
+export OLLAMA_MODEL="qwen3.5:latest"        # Optional: force an Ollama model (tool-capable for @{agent})
 ```
 
 See [AI Setup](doc/AI.md) for Ollama model selection and agent usage.

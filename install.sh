@@ -14,7 +14,7 @@ fi
 
 # Install
 REPO="arpanpathak/dogeleena-neo-agentic-ide"
-VERSION="v0.1.4"
+VERSION="v0.1.5"
 CONFIG_DIR="${HOME}/.config/dogeleena"
 BIN_DIR="${HOME}/.local/bin"
 
@@ -82,7 +82,7 @@ echo "  🎀  Dogeleena installed!"
 echo "  Launch: dogeleena"
 echo ""
 echo "  Uninstall: dogeleena-neo-agentic-ide uninstall"
-echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.4/install.sh | bash -s uninstall)"
+echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash -s uninstall)"
 echo ""
 echo "  Set your AI key: export ANTHROPIC_API_KEY=\"sk-ant-...\""
 echo ""
