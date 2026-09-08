@@ -132,12 +132,12 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Material Deep Ocean** 🌊 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
+Dogeleena ships with **Night Owl** 🦉 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
 
 | Theme | Mood | How to activate |
 |-------|------|----------------|
-| **Material Deep Ocean** 🌊 | Deep blue-black oceanic, the default | Default |
-| **Night Owl** 🦉 | Dark, low contrast, long sessions | `vim.cmd.colorscheme("night-owl")` |
+| **Night Owl** 🦉 | Dark, low contrast, built for long sessions | Default |
+| **Material Deep Ocean** 🌊 | Deep blue-black ocean, cyan/blue accents (no magenta/pink) | `vim.cmd.colorscheme("material")` |
 | **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | `vim.cmd.colorscheme("OceanicNext")` |
 | **Nord** ❄️ | Arctic blue, frosty, clean | `vim.cmd.colorscheme("nord")` |
 | **Catppuccin Mocha** 🧋 | Warm dark, cozy, popular | `vim.cmd.colorscheme("catppuccin-mocha")` |

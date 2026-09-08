@@ -76,11 +76,11 @@ return {
     end,
   },
 
-  -- ── Theme Toggle: cycle between Material Oceanic and tokyonight ────────────
+  -- ── Theme Toggle: cycle between Night Owl and tokyonight ──────────────────
   -- Toggle with: <leader>th
   {
     "folke/tokyonight.nvim",
-    lazy = true,
+    lazy = false,
     priority = 900,
     config = function()
       require("tokyonight").setup({

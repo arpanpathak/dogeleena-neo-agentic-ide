@@ -1,22 +1,15 @@
 return {
-  "marko-cerovac/material.nvim",
+  "oxfist/night-owl.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    -- Material Deep Ocean — the default Dogeleena theme.
-    vim.g.material_style = "deep ocean"
-    require("material").setup({
-      contrast = {
-        sidebars = true,
-        floating_windows = true,
-        cursor_line = true,
-      },
-      styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-        types = { italic = true },
-      },
+    require("night-owl").setup({
+      bold = true,
+      italics = true,
+      underline = true,
+      undercurl = true,
+      transparent_background = false,
     })
-    vim.cmd.colorscheme("material")
+    vim.cmd.colorscheme("night-owl")
   end,
 }

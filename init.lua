@@ -115,16 +115,16 @@ require("lazy").setup("plugins", {
 })
 
 -- ═══════════════════════════════════════════════════════════════════════════════
--- 4. THEME TOGGLE — Cycle between Material Deep Ocean and tokyonight
+-- 4. THEME TOGGLE — Cycle between Night Owl and tokyonight
 -- ═══════════════════════════════════════════════════════════════════════════════
-local current_theme = "material"
+local current_theme = "night-owl"
 local function toggle_theme()
-  if current_theme == "material" then
+  if current_theme == "night-owl" then
     vim.cmd.colorscheme("tokyonight")
     current_theme = "tokyonight"
   else
-    vim.cmd.colorscheme("material")
-    current_theme = "material"
+    vim.cmd.colorscheme("night-owl")
+    current_theme = "night-owl"
   end
   vim.notify('Theme: ' .. current_theme, vim.log.levels.INFO)
 end
