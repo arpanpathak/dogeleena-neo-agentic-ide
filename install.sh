@@ -14,7 +14,7 @@ fi
 
 # Install
 REPO="arpanpathak/dogeleena-neo-agentic-ide"
-BRANCH="main"
+VERSION="v0.1.0"
 CONFIG_DIR="${HOME}/.config/dogeleena"
 BIN_DIR="${HOME}/.local/bin"
 
@@ -38,8 +38,9 @@ command -v nvim >/dev/null 2>&1 || { echo "  ❌  Neovim not found"; exit 1; }
 
 # Download
 TMPDIR=$(mktemp -d)
-curl -fsSL "https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz" | tar xz -C "$TMPDIR" 2>/dev/null
-SRC="${TMPDIR}/dogeleena-neo-agentic-ide-${BRANCH}"
+SRC="${TMPDIR}/dogeleena"
+mkdir -p "$SRC"
+curl -fsSL "https://github.com/${REPO}/archive/refs/tags/${VERSION}.tar.gz" | tar xz -C "$SRC" --strip-components=1 2>/dev/null
 
 # Backup existing
 if [ -d "$CONFIG_DIR" ]; then
@@ -67,7 +68,7 @@ echo "  🎀  Dogeleena installed!"
 echo "  Launch: dogeleena"
 echo ""
 echo "  Uninstall: dogeleena-neo-agentic-ide uninstall"
-echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/main/install.sh | bash -s uninstall)"
+echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.0/install.sh | bash -s uninstall)"
 echo ""
 echo "  Set your AI key: export ANTHROPIC_API_KEY=\"sk-ant-...\""
 echo ""
