@@ -1,8 +1,18 @@
 -- Extra themes — pre-installed, ready to switch
--- These are downloaded but not activated (Night Owl is default).
+-- These are downloaded but not activated (Material Oceanic is default).
 -- To use one, change the colorscheme command in colorscheme.lua
 
 return {
+  -- 🎀 Material Oceanic — the default (see colorscheme.lua for setup)
+  --    switch: vim.g.material_style = "oceanic"; vim.cmd.colorscheme("material")
+
+  -- 🦉 Night Owl — dark, low contrast, long sessions
+  --    switch: vim.cmd.colorscheme("night-owl")
+  {
+    "oxfist/night-owl.nvim",
+    lazy = true,
+  },
+
   -- 🌊 Oceanic Next — deep ocean blue, calm, watery
   --    switch: vim.cmd.colorscheme("OceanicNext")
   {
@@ -52,5 +62,26 @@ return {
   {
     "rebelot/kanagawa.nvim",
     lazy = true,
+  },
+
+  -- 🌹 Rosé Pine — soft romantic dusk palette, easy on the eyes
+  --    switch: vim.cmd.colorscheme("rose-pine")
+  --    variants: rose-pine-moon, rose-pine-dawn
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = true,
+  },
+
+  -- 🌲 Everforest — warm green-based low-contrast theme for long sessions
+  --    switch: vim.cmd.colorscheme("everforest")
+  --    variants: dark/light + hard/medium/soft backgrounds
+  {
+    "sainnhe/everforest",
+    lazy = true,
+    init = function()
+      vim.g.everforest_background = "soft"
+      vim.g.everforest_enable_italic = true
+    end,
   },
 }

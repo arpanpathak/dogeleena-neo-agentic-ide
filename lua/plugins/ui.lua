@@ -76,24 +76,7 @@ return {
     end,
   },
 
-  -- ── Color Theme: night-owl (default) ───────────────────────────────────────
-  {
-    "oxfist/night-owl.nvim",
-    lazy = false,
-    priority = 900,
-    config = function()
-      require("night-owl").setup({
-        bold = true,
-        italics = true,
-        underline = true,
-        undercurl = true,
-        transparent_background = false,
-      })
-      vim.cmd.colorscheme("night-owl")
-    end,
-  },
-
-  -- ── Theme Toggle: cycle between night-owl and tokyonight ───────────────────
+  -- ── Theme Toggle: cycle between Material Oceanic and tokyonight ────────────
   -- Toggle with: <leader>th
   {
     "folke/tokyonight.nvim",

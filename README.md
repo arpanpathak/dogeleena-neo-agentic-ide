@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.0/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -56,7 +56,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.0/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -67,7 +67,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.0/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -93,7 +93,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.0/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash -s uninstall
 ```
 
 ## Features
@@ -128,29 +128,41 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Night Owl** 🦉 (default) and **5 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes.
+Dogeleena ships with **Material Oceanic** 🌊 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
 
 | Theme | Mood | How to activate |
 |-------|------|----------------|
-| **Night Owl** 🦉 | Dark, low contrast, long sessions | Default |
+| **Material Oceanic** 🌊 | Blue-black oceanic, the default | Default |
+| **Night Owl** 🦉 | Dark, low contrast, long sessions | `vim.cmd.colorscheme("night-owl")` |
 | **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | `vim.cmd.colorscheme("OceanicNext")` |
 | **Nord** ❄️ | Arctic blue, frosty, clean | `vim.cmd.colorscheme("nord")` |
 | **Catppuccin Mocha** 🧋 | Warm dark, cozy, popular | `vim.cmd.colorscheme("catppuccin-mocha")` |
 | **Tokyo Night** 🌃 | Deep blue/purple night sky, vibrant | `vim.cmd.colorscheme("tokyonight-night")` |
 | **Kanagawa** 🏮 | Dark ocean ink, japanese woodblock art | `vim.cmd.colorscheme("kanagawa")` |
+| **Rosé Pine** 🌹 | Soft romantic dusk, easy on the eyes | `vim.cmd.colorscheme("rose-pine")` |
+| **Everforest** 🌲 | Warm green low-contrast, built for long sessions | `vim.cmd.colorscheme("everforest")` |
 
-To switch, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua`:
+To preview another theme at any time, run inside Dogeleena:
+
+```vim
+:colorscheme rose-pine    " 🌹 Rosé Pine
+:colorscheme everforest   " 🌲 Everforest
+:colorscheme night-owl    " 🦉 Night Owl
+:colorscheme tokyonight   " 🌃 Tokyo Night
+```
+
+To make a theme the permanent default, edit `~/.config/dogeleena/lua/plugins/colorscheme.lua` and point the plugin + colorscheme command at the theme you want. For example, to use Rosé Pine:
 
 ```lua
--- Change this line:
-vim.cmd.colorscheme("night-owl")
-
--- To one of the pre-installed themes:
-vim.cmd.colorscheme("OceanicNext")     -- 🌊 Deep ocean blue
--- vim.cmd.colorscheme("nord")            -- ❄️ Arctic blue
--- vim.cmd.colorscheme("catppuccin-mocha") -- 🧋 Warm dark
--- vim.cmd.colorscheme("tokyonight-night") -- 🌃 Night sky
--- vim.cmd.colorscheme("kanagawa")         -- 🏮 Japanese ink
+return {
+  "rose-pine/neovim",
+  name = "rose-pine",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    vim.cmd.colorscheme("rose-pine")
+  end,
+}
 ```
 
 Then restart. No download needed — already installed.
