@@ -3,8 +3,8 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    -- Material Oceanic — the default Dogeleena theme.
-    vim.g.material_style = "oceanic"
+    -- Material Deep Ocean — the default Dogeleena theme.
+    vim.g.material_style = "deep ocean"
     require("material").setup({
       contrast = {
         sidebars = true,

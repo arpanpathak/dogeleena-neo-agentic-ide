@@ -115,7 +115,7 @@ require("lazy").setup("plugins", {
 })
 
 -- ═══════════════════════════════════════════════════════════════════════════════
--- 4. THEME TOGGLE — Cycle between Material Oceanic and tokyonight
+-- 4. THEME TOGGLE — Cycle between Material Deep Ocean and tokyonight
 -- ═══════════════════════════════════════════════════════════════════════════════
 local current_theme = "material"
 local function toggle_theme()

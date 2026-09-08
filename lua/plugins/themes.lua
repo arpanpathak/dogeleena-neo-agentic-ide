@@ -1,10 +1,10 @@
 -- Extra themes — pre-installed, ready to switch
--- These are downloaded but not activated (Material Oceanic is default).
+-- These are downloaded but not activated (Material Deep Ocean is default).
 -- To use one, change the colorscheme command in colorscheme.lua
 
 return {
-  -- 🎀 Material Oceanic — the default (see colorscheme.lua for setup)
-  --    switch: vim.g.material_style = "oceanic"; vim.cmd.colorscheme("material")
+  -- 🎀 Material Deep Ocean — the default (see colorscheme.lua for setup)
+  --    switch: vim.g.material_style = "deep ocean"; vim.cmd.colorscheme("material")
 
   -- 🦉 Night Owl — dark, low contrast, long sessions
   --    switch: vim.cmd.colorscheme("night-owl")

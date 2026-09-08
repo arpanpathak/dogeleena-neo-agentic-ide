@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.2/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -56,7 +56,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.2/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -67,7 +67,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.2/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -93,7 +93,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.1/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.2/install.sh | bash -s uninstall
 ```
 
 ## Features
@@ -128,11 +128,11 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Material Oceanic** 🌊 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
+Dogeleena ships with **Material Deep Ocean** 🌊 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
 
 | Theme | Mood | How to activate |
 |-------|------|----------------|
-| **Material Oceanic** 🌊 | Blue-black oceanic, the default | Default |
+| **Material Deep Ocean** 🌊 | Deep blue-black oceanic, the default | Default |
 | **Night Owl** 🦉 | Dark, low contrast, long sessions | `vim.cmd.colorscheme("night-owl")` |
 | **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | `vim.cmd.colorscheme("OceanicNext")` |
 | **Nord** ❄️ | Arctic blue, frosty, clean | `vim.cmd.colorscheme("nord")` |
