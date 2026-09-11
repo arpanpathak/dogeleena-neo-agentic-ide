@@ -415,11 +415,33 @@
 | `<Space>fr` | Recent files (Telescope) |
 | `<Space>fg` | Live grep / find text (Telescope) |
 | `<Space>th` | Toggle color theme |
+| `<Space>de` | Show error/warning under the cursor |
+| `<Space>dl` | List all errors/warnings |
 | `<Space>q` | Quit |
 
 ---
 
-## 14. Quick Reference Cheatsheet
+## 14. Errors & Diagnostics
+
+The `E` / `W` sign in the gutter only marks *that* a line has a problem — it
+does not tell you what the problem is. To actually read the message:
+
+| Key | Action |
+|-----|--------|
+| *(just wait)* | Rest the cursor on the line — the full message pops up automatically (~250ms) |
+| `<Space>de` | Show the error/warning under the cursor in a floating window |
+| `<Space>dl` | Put every diagnostic in the location list, then `:lopen` to browse |
+| `[d` | Jump to the previous error/warning |
+| `]d` | Jump to the next error/warning |
+| `:lopen` / `:lclose` | Open / close the diagnostic list window |
+
+You'll also see the message inline at the end of the line (`● <message>`) and
+the offending code underlined — so most of the time you don't even need to
+hover.
+
+---
+
+## 15. Quick Reference Cheatsheet
 
 ```
 Movement:   h ←  j ↓  k ↑  l →
@@ -434,4 +456,5 @@ Marks:      mx 'x `x :marks
 Registers:  "0 "9 "+ "*  "a-"z
 Macros:     q{letter} commands q  @{letter}
 Jumps:      Ctrl+o  Ctrl+i
+Errors:     pause to hover · Space+de details · Space+dl list · [d ]d jump
 ```

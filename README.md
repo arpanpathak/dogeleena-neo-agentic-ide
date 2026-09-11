@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -60,7 +60,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -97,13 +97,14 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash -s uninstall
 ```
 
 ## Features
 
 - AI chat (OpenAI, Anthropic, DeepSeek, Gemini, Ollama — set env var)
 - LSP: TypeScript, Python, C/C++, Kotlin, Java, Rust
+- Readable diagnostics: inline messages, error underline, hover popup
 - File explorer, buffer tabs, markdown preview
 - 100% isolated from your ~/.config/nvim
 
@@ -189,8 +190,12 @@ Then restart. No download needed — already installed.
 | `K` | Hover docs |
 | `<leader>ca` | Code actions |
 | `<leader>rn` | Rename |
-| `<leader>de` | Diagnostic details |
+| `<leader>de` | Show the error/warning under the cursor |
+| `<leader>dl` | List all diagnostics |
 | `[d` / `]d` | Previous / next diagnostic |
+
+> Error messages also show inline (`● ...`) with the bad code underlined, and
+> the message pops up automatically if you rest the cursor on the line.
 
 ## AI Providers
 

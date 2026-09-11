@@ -31,6 +31,45 @@ return {
   },
   config = function()
     -- ═════════════════════════════════════════════════════════════════════════
+    -- 0. DIAGNOSTICS — make errors readable (not just an "E" in the gutter)
+    -- ═════════════════════════════════════════════════════════════════════════
+    -- By default Neovim only draws the "E" sign in the sign column, so you get
+    -- a line number and no idea what's wrong. This shows the message inline,
+    -- underlines the offending code, and offers a popup.
+    vim.diagnostic.config({
+      virtual_text = { spacing = 2, prefix = "●" }, -- message at end of line
+      signs = true,                                 -- the E/W/I gutter sign
+      underline = true,                             -- highlight the bad token
+      update_in_insert = false,                     -- don't flicker while typing
+      severity_sort = true,                         -- errors before warnings
+      float = { border = "rounded", source = true },
+    })
+
+    -- "Hover" an error: rest the cursor on the line and the full message pops
+    -- up after `updatetime` (250ms). No keypress needed.
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+        if #vim.diagnostic.get(bufnr, { lnum = lnum }) > 0 then
+          -- scope = "line" (not "cursor") so it works wherever the cursor sits
+          -- on the line, not only when it is inside the error's exact range.
+          vim.diagnostic.open_float(nil, { focus = false, scope = "line" })
+        end
+      end,
+    })
+
+    -- Manual controls (global, so they work even before an LSP attaches).
+    vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float,
+      { silent = true, desc = "Diagnostic — show error/warning under cursor" })
+    vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist,
+      { silent = true, desc = "Diagnostic — list all in location list" })
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+      { silent = true, desc = "Diagnostic — previous" })
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+      { silent = true, desc = "Diagnostic — next" })
+
+    -- ═════════════════════════════════════════════════════════════════════════
     -- 1. MASON: Automatic LSP Installer
     -- ═════════════════════════════════════════════════════════════════════════
     -- Mason downloads and manages LSP server binaries.
@@ -114,12 +153,7 @@ return {
       map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Actions")
       map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename Symbol")
 
-      -- Diagnostics
-      map("n", "<leader>de", vim.diagnostic.open_float, "LSP: Diagnostic Details")
-      map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
-        "LSP: Previous Diagnostic")
-      map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
-        "LSP: Next Diagnostic")
+      -- Diagnostics (<leader>de, <leader>dl, [d, ]d) are global — see section 0.
     end
 
     local server_configs = {
