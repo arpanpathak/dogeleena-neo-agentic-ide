@@ -132,10 +132,23 @@ vim.keymap.set("n", "<leader>th", toggle_theme,
   { silent = true, desc = "Theme — Toggle" })
 
 -- ═══════════════════════════════════════════════════════════════════════════════
--- 5. QUIT — leader-gated on purpose
+-- 5. DON'T EXIT BY ACCIDENT
 -- ═══════════════════════════════════════════════════════════════════════════════
--- Quitting requires <leader>q. A bare `q` must never exit the editor: the old
--- homescreen bound plain `q` to :qa, so a stray keypress on the dashboard
--- dropped you straight back to the shell.
-vim.keymap.set("n", "<leader>q", "<cmd>qa<CR>",
-  { silent = true, desc = "Quit Neovim" })
+-- Nothing in this config should quit Neovim from a single stray key. Quit with
+-- `:q` / `:qa` (or `ZZ`) when you actually mean it.
+--
+-- `<C-w>q` / `<C-w>c` are the classic "why did my editor close?!" trap: they
+-- kill the last window, and Neovim exits when the last window closes. Guard
+-- them so they only close a split, and warn instead of exiting.
+local function close_window_safely()
+  if #vim.api.nvim_tabpage_list_wins(0) > 1 then
+    vim.cmd("close")
+  else
+    vim.notify("Not closing the last window — use :q to quit Neovim",
+      vim.log.levels.WARN)
+  end
+end
+vim.keymap.set("n", "<C-w>q", close_window_safely,
+  { silent = true, desc = "Close window (guarded against quitting)" })
+vim.keymap.set("n", "<C-w>c", close_window_safely,
+  { silent = true, desc = "Close window (guarded against quitting)" })

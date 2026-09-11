@@ -44,10 +44,10 @@ return {
         dashboard.button("f", "  🔍  Find File", ":Telescope find_files<CR>"),
         dashboard.button("r", "  📄  Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("g", "  🔎  Find Text", ":Telescope live_grep<CR>"),
-        -- Quit needs the leader key. Binding bare `q` here meant that pressing
-        -- `q` on the homescreen (e.g. to dismiss it) quit Neovim instantly and
-        -- dumped you back to the shell.
-        dashboard.button("<leader>q", "  ❌  Quit", ":qa<CR>"),
+        -- No quit shortcut here on purpose. The homescreen sits under the
+        -- cursor on every launch, so a single stray key bound to :qa (bare `q`,
+        -- or even <leader>q) kept dumping people back to the shell. Quit with
+        -- :q when you actually mean it.
       }
 
       -- Footer: version + AI adapter info

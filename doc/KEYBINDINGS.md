@@ -14,7 +14,9 @@
 | `<leader>fg` | Live grep |
 | `<leader>fr` | Recent files |
 | `<leader>th` | Toggle colour theme |
-| `<leader>q` | Quit Neovim |
+
+> **Quit with `:q` / `:qa`.** There is intentionally no single-key quit binding —
+> a stray key used to close Neovim and dump you back to the shell.
 
 ## LSP
 

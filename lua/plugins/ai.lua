@@ -116,10 +116,16 @@ return {
 
           -- Ollama (local, free, private)
           -- OLLAMA_HOST must include the scheme, e.g. http://localhost:11434
+          -- OLLAMA_MODEL pins the model (use a tool-capable one for @{agent}).
           ollama = function()
-            return require("codecompanion.adapters").extend("ollama", {
+            local adapter = require("codecompanion.adapters").extend("ollama", {
               env = { url = os.getenv("OLLAMA_HOST") or "http://localhost:11434" },
             })
+            local model = os.getenv("OLLAMA_MODEL")
+            if model and model ~= "" then
+              adapter.schema.model.default = model
+            end
+            return adapter
           end,
         },
       },

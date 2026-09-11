@@ -67,6 +67,23 @@ In AI chat (`<leader>ac`), type `@{agent}` to give AI file/tool access.
 @{agent} Find where auth is defined and add rate limiting
 ```
 
+### Approving tool calls
+
+The agent never edits files or runs commands silently. When it wants to use a
+tool it shows an **Approval Required** prompt at the bottom of the chat and
+waits for you to choose:
+
+| Key | Action |
+|-----|--------|
+| `g1` | **Always accept** — stops asking for the rest of the session |
+| `g2` | Accept this one |
+| `g3` | Reject this one |
+| `g4` | Cancel the request |
+
+> If you send `@{agent} ...` and it looks like nothing is happening, it is
+> almost always sitting on this prompt. Press `g1` to accept everything, or
+> `g2` to accept just that call.
+
 ## Inline Actions
 
 Select code, press `<leader>ae`, then pick an action or type a prompt.

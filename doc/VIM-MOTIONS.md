@@ -62,8 +62,8 @@
 | `Ctrl+w s` | Split horizontally |
 | `Ctrl+w v` | Split vertically |
 | `Ctrl+w o` | Close all other windows (keep current) |
-| `Ctrl+w c` | Close current window |
-| `Ctrl+w q` | Close current window / quit |
+| `Ctrl+w c` | Close current window (refuses to close the last one) |
+| `Ctrl+w q` | Same as `Ctrl+w c` — guarded so it can't quit by accident |
 | `Ctrl+w x` | Swap windows |
 | `Ctrl+w r` | Rotate windows |
 | `Ctrl+w R` | Rotate windows backwards |
@@ -417,7 +417,10 @@
 | `<Space>th` | Toggle color theme |
 | `<Space>de` | Show error/warning under the cursor |
 | `<Space>dl` | List all errors/warnings |
-| `<Space>q` | Quit |
+
+> **Quitting:** `:q` (or `:qa` / `ZZ`). There is deliberately **no single-key
+> quit** — the homescreen used to bind `q` to `:qa` and it kept throwing people
+> back to the shell. `<C-w>q` / `<C-w>c` also refuse to close the last window.
 
 ---
 

@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -60,7 +60,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -97,7 +97,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.7/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash -s uninstall
 ```
 
 ## Features
@@ -183,7 +183,6 @@ Then restart. No download needed — already installed.
 | `<leader>fg` | Live grep |
 | `<leader>fr` | Recent files |
 | `<leader>th` | Toggle theme |
-| `<leader>q` | Quit |
 | `gd` | Go to definition |
 | `gi` | Go to implementation |
 | `gr` | Find references |
@@ -196,6 +195,9 @@ Then restart. No download needed — already installed.
 
 > Error messages also show inline (`● ...`) with the bad code underlined, and
 > the message pops up automatically if you rest the cursor on the line.
+
+> **To quit:** `:q` / `:qa` (or `ZZ`). There is no single-key quit binding on
+> purpose — a stray key used to close Neovim and drop you back to the shell.
 
 ## AI Providers
 
