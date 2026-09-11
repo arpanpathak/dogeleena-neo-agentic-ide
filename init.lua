@@ -31,7 +31,7 @@
 -- She codes. She refactors. She ships. Much wow.
 --
 -- Requirements:
---   • Neovim >= 0.11.0
+--   • Neovim >= 0.11.0 (use a STABLE release — 0.x.y-dev nightlies segfault)
 --   • Git >= 2.19
 --   • A Nerd Font (see fonts/ directory)
 --   • Node.js >= 18 (for TypeScript LSP)

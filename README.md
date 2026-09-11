@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.9/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -42,6 +42,13 @@ Then set your AI key and launch:
 export ANTHROPIC_API_KEY="sk-ant-..."
 dogeleena
 ```
+
+> **Use a stable Neovim.** Dogeleena needs Neovim >= 0.11, but the
+> `neovim-ppa/unstable` / `0.x.y-dev` nightly builds can **segfault** under
+> heavy plugin + LSP + treesitter load — it looks like being randomly dumped
+> back to the shell with the screen still frozen. The installer detects a dev
+> build and installs a stable Neovim (currently v0.12.5) to
+> `~/.local/opt/nvim-*`, which the `dogeleena` launcher then prefers.
 
 > **aarch64 / ARM64 (Jetson, Raspberry Pi, etc.)** — make sure you have the
 > build essentials installed first. They are needed to compile Treesitter
@@ -60,7 +67,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.9/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -71,7 +78,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.9/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -97,7 +104,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.9/install.sh | bash -s uninstall
 ```
 
 ## Features

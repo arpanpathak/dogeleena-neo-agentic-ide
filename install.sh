@@ -14,7 +14,7 @@ fi
 
 # Install
 REPO="arpanpathak/dogeleena-neo-agentic-ide"
-VERSION="v0.1.8"
+VERSION="v0.1.9"
 CONFIG_DIR="${HOME}/.config/dogeleena"
 BIN_DIR="${HOME}/.local/bin"
 
@@ -33,8 +33,44 @@ if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
   fi
 fi
 
-# Check nvim
-command -v nvim >/dev/null 2>&1 || { echo "  ❌  Neovim not found"; exit 1; }
+# ── Neovim: prefer a stable build ─────────────────────────────────────────────
+# Distro / neovim-ppa "unstable" packages are 0.x.y-dev nightlies and can
+# segfault under heavy plugin + LSP + treesitter load (looks like being dumped
+# back to the terminal at random). If the system Neovim is a dev build (or
+# missing), install a stable release under ~/.local/opt — bin/dogeleena uses it.
+NVIM_STABLE_VERSION="v0.12.5"
+NVIM_STABLE_DIR="${HOME}/.local/opt/nvim-${NVIM_STABLE_VERSION#v}"
+NVIM_NEEDS_STABLE=0
+if ! command -v nvim >/dev/null 2>&1; then
+  NVIM_NEEDS_STABLE=1
+elif nvim --version 2>/dev/null | head -1 | grep -q -- '-dev'; then
+  echo "  🧯  System Neovim is a dev build (unstable) — Dogeleena will use a stable one."
+  NVIM_NEEDS_STABLE=1
+fi
+if [ "$NVIM_NEEDS_STABLE" = 1 ] && [ ! -x "${NVIM_STABLE_DIR}/bin/nvim" ]; then
+  case "$ARCH" in
+    aarch64|arm64) NVIM_ASSET="nvim-linux-arm64.tar.gz" ;;
+    x86_64|amd64)  NVIM_ASSET="nvim-linux-x86_64.tar.gz" ;;
+    *)             NVIM_ASSET="" ;;
+  esac
+  if [ -n "$NVIM_ASSET" ]; then
+    echo "  ⬇️  Installing stable Neovim ${NVIM_STABLE_VERSION} to ${NVIM_STABLE_DIR}..."
+    _nvim_tmp="$(mktemp -d)"
+    if curl -fsSL "https://github.com/neovim/neovim/releases/download/${NVIM_STABLE_VERSION}/${NVIM_ASSET}" \
+        | tar xz -C "$_nvim_tmp" 2>/dev/null; then
+      mkdir -p "${HOME}/.local/opt"
+      rm -rf "$NVIM_STABLE_DIR"
+      mv "$_nvim_tmp"/nvim-linux-* "$NVIM_STABLE_DIR"
+      echo "  ✅  Stable Neovim installed."
+    else
+      echo "  ⚠️  Could not download stable Neovim — falling back to the system build."
+    fi
+    rm -rf "$_nvim_tmp"
+  fi
+fi
+if ! command -v nvim >/dev/null 2>&1 && [ ! -x "${NVIM_STABLE_DIR}/bin/nvim" ]; then
+  echo "  ❌  Neovim not found and stable download failed"; exit 1
+fi
 
 # Check tree-sitter CLI (needed by nvim-treesitter main to build parsers).
 export PATH="${HOME}/.local/bin:${PATH}"
@@ -82,7 +118,7 @@ echo "  🎀  Dogeleena installed!"
 echo "  Launch: dogeleena"
 echo ""
 echo "  Uninstall: dogeleena-neo-agentic-ide uninstall"
-echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.8/install.sh | bash -s uninstall)"
+echo "  (or run: curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.9/install.sh | bash -s uninstall)"
 echo ""
 echo "  Set your AI key: export ANTHROPIC_API_KEY=\"sk-ant-...\""
 echo ""

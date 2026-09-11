@@ -1,3 +1,19 @@
 #!/usr/bin/env bash
+# Dogeleena launcher.
+#
+# The distro / neovim-ppa "unstable" packages are 0.x.y-dev nightlies and can
+# segfault under heavy plugin + LSP + treesitter load (which looks like being
+# randomly dumped back to the terminal). Prefer a stable Neovim under
+# ~/.local/opt/nvim-* (install.sh puts one there), then fall back to PATH.
 export NVIM_APPNAME="dogeleena"
+
+NVIM_BIN=""
+for candidate in "$HOME"/.local/opt/nvim-*/bin/nvim; do
+  [ -x "$candidate" ] && NVIM_BIN="$candidate"
+done
+
+if [ -n "$NVIM_BIN" ]; then
+  exec "$NVIM_BIN" "$@"
+fi
+
 exec nvim "$@"
