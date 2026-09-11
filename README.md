@@ -34,7 +34,7 @@ One-command install. Zero config. Zero interference with existing Neovim.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash
 ```
 
 Then set your AI key and launch:
@@ -60,7 +60,7 @@ After a new release, sync the latest config to your local install:
 
 ```bash
 # Re-run the install script (pulls latest from GitHub)
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash
 ```
 
 > ⚠️ This replaces your entire `~/.config/dogeleena/`, including any custom edits.
@@ -71,7 +71,7 @@ curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-i
 ```bash
 # Example: update only themes
 curl -fsSLo ~/.config/dogeleena/lua/plugins/themes.lua \
-  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/lua/plugins/themes.lua
+  https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/lua/plugins/themes.lua
 ```
 
 ### Clear plugin cache
@@ -97,7 +97,7 @@ dogeleena
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.5/install.sh | bash -s uninstall
+curl -fsSL https://raw.githubusercontent.com/arpanpathak/dogeleena-neo-agentic-ide/v0.1.6/install.sh | bash -s uninstall
 ```
 
 ## Features
@@ -132,12 +132,12 @@ After changing, restart Dogeleena. All `<leader>` shortcuts use your new key.
 
 ## Themes
 
-Dogeleena ships with **Night Owl** 🦉 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
+Dogeleena ships with **Material Deep Ocean** 🌊 (default) plus **8 additional pre-installed themes** for easy switching. All are dark, eye-soothing themes with detailed Treesitter/LSP-aware syntax colors for keywords, types, functions, strings, and more.
 
 | Theme | Mood | How to activate |
 |-------|------|----------------|
-| **Night Owl** 🦉 | Dark, low contrast, built for long sessions | Default |
-| **Material Deep Ocean** 🌊 | Deep blue-black ocean, cyan/blue accents (no magenta/pink) | `vim.cmd.colorscheme("material")` |
+| **Material Deep Ocean** 🌊 | Deep blue-black oceanic, the default | Default |
+| **Night Owl** 🦉 | Dark, low contrast, long sessions | `vim.cmd.colorscheme("night-owl")` |
 | **Oceanic Next** 🌊 | Deep ocean blue, calm, japanese vibe | `vim.cmd.colorscheme("OceanicNext")` |
 | **Nord** ❄️ | Arctic blue, frosty, clean | `vim.cmd.colorscheme("nord")` |
 | **Catppuccin Mocha** 🧋 | Warm dark, cozy, popular | `vim.cmd.colorscheme("catppuccin-mocha")` |
@@ -178,10 +178,19 @@ Then restart. No download needed — already installed.
 | `<leader>e` | File explorer |
 | `<leader>ac` | AI chat |
 | `<leader>ae` | AI actions (visual) |
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>fr` | Recent files |
+| `<leader>th` | Toggle theme |
+| `<leader>q` | Quit |
 | `gd` | Go to definition |
+| `gi` | Go to implementation |
+| `gr` | Find references |
 | `K` | Hover docs |
 | `<leader>ca` | Code actions |
 | `<leader>rn` | Rename |
+| `<leader>de` | Diagnostic details |
+| `[d` / `]d` | Previous / next diagnostic |
 
 ## AI Providers
 

@@ -115,18 +115,27 @@ require("lazy").setup("plugins", {
 })
 
 -- ═══════════════════════════════════════════════════════════════════════════════
--- 4. THEME TOGGLE — Cycle between Night Owl and tokyonight
+-- 4. THEME TOGGLE — Cycle between Material Deep Ocean and tokyonight
 -- ═══════════════════════════════════════════════════════════════════════════════
-local current_theme = "night-owl"
+local current_theme = "material"
 local function toggle_theme()
-  if current_theme == "night-owl" then
+  if current_theme == "material" then
     vim.cmd.colorscheme("tokyonight")
     current_theme = "tokyonight"
   else
-    vim.cmd.colorscheme("night-owl")
-    current_theme = "night-owl"
+    vim.cmd.colorscheme("material")
+    current_theme = "material"
   end
   vim.notify('Theme: ' .. current_theme, vim.log.levels.INFO)
 end
 vim.keymap.set("n", "<leader>th", toggle_theme,
   { silent = true, desc = "Theme — Toggle" })
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- 5. QUIT — leader-gated on purpose
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- Quitting requires <leader>q. A bare `q` must never exit the editor: the old
+-- homescreen bound plain `q` to :qa, so a stray keypress on the dashboard
+-- dropped you straight back to the shell.
+vim.keymap.set("n", "<leader>q", "<cmd>qa<CR>",
+  { silent = true, desc = "Quit Neovim" })

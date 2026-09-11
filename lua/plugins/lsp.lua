@@ -39,8 +39,9 @@ return {
 
     -- Mason's clangd package does not support aarch64/ARM64. On those systems
     -- we keep the clangd server config below and use the distro's clangd.
-    local is_arm64 = vim.loop.os_uname().machine == "aarch64"
-      or vim.loop.os_uname().machine == "arm64"
+    -- (vim.uv is the modern alias; vim.loop is deprecated.)
+    local machine = vim.uv.os_uname().machine
+    local is_arm64 = machine == "aarch64" or machine == "arm64"
 
     -- Auto-install these servers when they're needed (lazy install on demand)
     local ensure_installed = {
@@ -93,15 +94,32 @@ return {
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    -- Shared LSP keymaps, set when any LSP server attaches to a buffer
+    -- Shared LSP keymaps, set when any LSP server attaches to a buffer.
+    -- Keep in sync with doc/KEYBINDINGS.md and rust.lua's on_attach.
     local on_attach = function(client, bufnr)
-      -- Go to definition of symbol under cursor
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-        { buffer = bufnr, desc = "LSP: Go to Definition" })
+      local function map(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
+      end
 
-      -- Show hover documentation (type info, docs, signatures)
-      vim.keymap.set("n", "K", vim.lsp.buf.hover,
-        { buffer = bufnr, desc = "LSP: Hover Documentation" })
+      -- Navigation
+      map("n", "gd", vim.lsp.buf.definition, "LSP: Go to Definition")
+      map("n", "gi", vim.lsp.buf.implementation, "LSP: Go to Implementation")
+      map("n", "gr", vim.lsp.buf.references, "LSP: Find References")
+
+      -- Documentation / signatures
+      map("n", "K", vim.lsp.buf.hover, "LSP: Hover Documentation")
+      map("n", "<C-k>", vim.lsp.buf.signature_help, "LSP: Signature Help")
+
+      -- Refactoring
+      map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code Actions")
+      map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: Rename Symbol")
+
+      -- Diagnostics
+      map("n", "<leader>de", vim.diagnostic.open_float, "LSP: Diagnostic Details")
+      map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+        "LSP: Previous Diagnostic")
+      map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+        "LSP: Next Diagnostic")
     end
 
     local server_configs = {

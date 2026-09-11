@@ -59,7 +59,11 @@ return {
           -- REFACTORING & ACTIONS
           -- ═════════════════════════════════════════════════════════════════
           -- Code actions: auto-import, extract variable, add derive, etc.
-          vim.keymap.set("n", "<leader>ca", vim.cmd.RustLsp("codeAction"), opts)
+          -- NOTE: wrap in a function — `vim.cmd.RustLsp(...)` executes the
+          -- command immediately and returns its output, so passing it directly
+          -- would fire the code-action picker on every LSP attach and leave the
+          -- mapping broken.
+          vim.keymap.set("n", "<leader>ca", function() vim.cmd.RustLsp("codeAction") end, opts)
           -- Rename symbol project-wide (safe, updates all references)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           -- Show diagnostic details in a floating window

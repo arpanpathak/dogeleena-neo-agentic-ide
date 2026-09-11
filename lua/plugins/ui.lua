@@ -44,7 +44,10 @@ return {
         dashboard.button("f", "  🔍  Find File", ":Telescope find_files<CR>"),
         dashboard.button("r", "  📄  Recent Files", ":Telescope oldfiles<CR>"),
         dashboard.button("g", "  🔎  Find Text", ":Telescope live_grep<CR>"),
-        dashboard.button("q", "  ❌  Quit", ":qa<CR>"),
+        -- Quit needs the leader key. Binding bare `q` here meant that pressing
+        -- `q` on the homescreen (e.g. to dismiss it) quit Neovim instantly and
+        -- dumped you back to the shell.
+        dashboard.button("<leader>q", "  ❌  Quit", ":qa<CR>"),
       }
 
       -- Footer: version + AI adapter info
@@ -76,21 +79,7 @@ return {
     end,
   },
 
-  -- ── Theme Toggle: cycle between Night Owl and tokyonight ──────────────────
-  -- Toggle with: <leader>th
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 900,
-    config = function()
-      require("tokyonight").setup({
-        style = "night",
-        transparent = false,
-        styles = {
-          comments = { italic = true },
-          keywords = { italic = true },
-        },
-      })
-    end,
-  },
+  -- NOTE: tokyonight is defined once, in themes.lua. Declaring it again here
+  -- produced a duplicate plugin spec that lazy merged into a single spec with
+  -- both `opts` and `config`, so this setup block silently never ran.
 }

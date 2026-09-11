@@ -410,10 +410,10 @@
 | `<Space>ac` | Open AI Code Companion Chat |
 | `<Space>aa` | Open AI Code Companion Chat (alias) |
 | `<Space>ae` | AI Code Actions (visual mode) |
-| `<Space>e` | Toggle Neo-tree file explorer |
-| `<Space>f` | Find file (Telescope) |
-| `<Space>r` | Recent files (Telescope) |
-| `<Space>g` | Live grep / find text (Telescope) |
+| `<Space>e` | Reveal current file in Neo-tree |
+| `<Space>ff` | Find file (Telescope) |
+| `<Space>fr` | Recent files (Telescope) |
+| `<Space>fg` | Live grep / find text (Telescope) |
 | `<Space>th` | Toggle color theme |
 | `<Space>q` | Quit |
 
